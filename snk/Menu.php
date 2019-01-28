@@ -5,16 +5,23 @@
 
 
 <li class="nav-item active">
-  <a class="nav-link" href="?page=home">
-    <i class="fas fa-fw far fa-home"></i>
-    <span>Home</span>
+  <a class="nav-link" href="/web">
+    <i class="fas fa-fw fa-tachometer-alt"></i>
+    <span>Halaman Awal</span>
+  </a>
+</li>
+
+<li class="nav-item active">
+  <a class="nav-link" href="?page=d3back">
+    <i class="fas fa-fw fa-chart-pie"></i>
+    <span>Grafik Kerusakan</span>
   </a>
 </li>
 
     <li class="nav-item active">
       <a class="nav-link" href="?page=d1back">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Detail Grafik</span>
+        <span>Detail Grafik Kerusakan</span>
       </a>
     </li>
 

@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+
 if (isset($_POST['cari'])) {
   $tgl1=$_POST['tgl1'];
   $tgl2=$_POST['tgl2'];
@@ -26,7 +26,7 @@ if (isset($_POST['cari'])) {
     AND trouble_et.Tanggal_Done>='$tgl1'
     AND trouble_et.Tanggal_Done<='$tgl2'
     GROUP BY perangkat_vm.Nama_Perangkat, penyebab.Penyebab) a
-    WHERE Nama_Perangkat ='$nape';");
+    WHERE Nama_Perangkat ='$nape'");
 
   $count = mysqli_query($koneksi, "SELECT jumlah FROM
     (SELECT perangkat_vm.Jenis, perangkat_vm.Nama_Perangkat, penyebab.Penyebab,
@@ -35,7 +35,7 @@ if (isset($_POST['cari'])) {
     WHERE projek.Nama_Projek='$napro'
     AND trouble_et.Tanggal_Done>='$tgl1'
     AND trouble_et.Tanggal_Done<='$tgl2'
-    GROUP BY perangkat_vm.Nama_Perangkat, penyebab.Penyebab) a WHERE Nama_Perangkat ='$nape';");
+    GROUP BY perangkat_vm.Nama_Perangkat, penyebab.Penyebab) a WHERE Nama_Perangkat ='$nape'");
 
 $table = mysqli_query($koneksi, " SELECT Tanggal_Done AS Tanggal_Kejadian,
 projek.Nama_Projek AS Nama_Projek, stasiun.Nama_Stasiun AS Lokasi,
@@ -46,8 +46,8 @@ JOIN projek ON (trouble_et.No_Projek=projek.No_Projek) JOIN et ON
 (trouble_et.No_PVM=perangkat_vm.No_PVM) JOIN penyebab ON
 (trouble_et.No_Penyebab=penyebab.No_Penyebab) WHERE Nama_Projek='$napro' AND
 perangkat_vm.Nama_Perangkat='$nape' AND Tanggal_Done>='$tgl1' AND
-Tanggal_Done<='$tgl2' GROUP BY Nama_Perangkat ORDER BY Penyebab,
-Total_Kejadian DESC; ");
+Tanggal_Done<='$tgl2' GROUP BY Nama_Perangkat,penyebab.`Penyebab` ORDER BY Penyebab,
+Total_Kejadian DESC");
 }
  ?>
 
@@ -65,7 +65,7 @@ Total_Kejadian DESC; ");
    <div class="card-body">
    <center><i class="fas fa-circle-notch"></i> <?php echo $nape; ?></center>
      <br><br>
-     <canvas id="myBarChart" width="100%" height="50"></canvas>
+     <canvas id="bar-chart-horizontal" width="100%" height="50"></canvas>
 
    </div>
  </div>

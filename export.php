@@ -6,12 +6,14 @@
   //
   // execute sql query
   //
+
 if (isset($_POST['export'])) {
   // code...
   $tgl1=$_POST['tgl1'];
   $tgl2=$_POST['tgl2'];
   $projek=$_POST['projek'];
   $status=$_POST['status'];
+
 
   if ($_POST['projek']==""&&$_POST['status']=="") {
 
@@ -97,8 +99,9 @@ if ( $kiwong )
 // output data rows (if atleast one row exists)
 //
 
+
 header( 'Content-Type: text/csv' );
-header( 'Content-Disposition: attachment;filename=Logfile.csv' );
+header( 'Content-Disposition: attachment;filename=Logfile_'.$tgl1.'_s/d_'.$tgl2.'.csv' );
 header("Pragma: no-cache");
 header("Expires: 0");
 while ( $kiwong )

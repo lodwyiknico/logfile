@@ -1,6 +1,12 @@
 (function($) {
   "use strict"; // Start of use strict
 
+
+//datepicker
+$( function() {
+  $( "#tgl1" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  $( "#tgl2" ).datepicker({ dateFormat: 'yy-mm-dd' });
+} );
   // Toggle the side navigation
   $("#sidebarToggle").on('click',function(e) {
     e.preventDefault();

@@ -2,14 +2,20 @@
 <html lang="en">
 <?php
 error_reporting(0);
-include 'database/config.php'; ?>
+include 'database/config.php';
+session_start();
+if($_SESSION['user']==null){
+    header("location:mfold/login");
+  }
+ ?>
+
   <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="Lodwyiknico" content="">
 
     <title>Web Admin</title>
 
@@ -25,13 +31,17 @@ include 'database/config.php'; ?>
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/sb-admin.js"></script>
+
   </head>
 
   <body id="page-top">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top navbar-fixed-top">
 
-      <a class="navbar-brand mr-1" href="index.html">Nutech-Integrasi</a>
+      <a class="navbar-brand mr-1" href="/web">Call Center & IT Support</a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -46,9 +56,6 @@ include 'database/config.php'; ?>
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Activity Log</a>
-            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
           </div>
         </li>
@@ -57,22 +64,23 @@ include 'database/config.php'; ?>
     </nav>
 
     <div id="wrapper">
-
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
-        <?php include 'Menu.php'; ?>
+        <?php include 'snk/Menu.php'; ?>
       </ul>
       <!-- konten -->
+      <div class="container-fluid">
       <div id="content-wrapper">
-       <?php include 'buka_file.php'; ?>
+       <?php include 'snk/buka_file.php'; ?>
         </div>
+      </div>
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright © Nutech-Integrasi 2019</span>
+              <span>Copyright © CCIT 2019</span>
             </div>
           </div>
         </footer>
@@ -101,7 +109,7 @@ include 'database/config.php'; ?>
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="mfold/logout">Logout</a>
           </div>
         </div>
       </div>
@@ -124,82 +132,18 @@ include 'database/config.php'; ?>
 
     <!-- Demo scripts for this page-->
     <script src="js/demo/datatables-demo.js"></script>
-
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#dataTable2').DataTable();
+});
+</script>
     <script src="jquery.chained.min.js"></script>
     <script>
         $("#namapra").chained("#namapro");
     </script>
-    <script type="text/javascript">
-    var ctx = document.getElementById("myBarChart");
-    var myLineChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [<?php while ($b = mysqli_fetch_array($nama)) { echo '"' . $b['Penyebab'] . '",';}?>],
-        datasets: [{
-          label: "Total",
-          backgroundColor: [
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex(),
-          getRandomColorHex()
-          ],
-
-          borderWidth: 5,
-          data: [<?php while ($p = mysqli_fetch_array($count)) { echo '"' . $p['jumlah'] . '",';}?>],
-        }],
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            time: {
-              unit: 'month'
-            },
-            gridLines: {
-              display: false
-            },
-            ticks: {
-              maxTicksLimit: 6
-            }
-          }],
-          yAxes: [{
-            ticks: {
-            beginAtZero: true
-            },
-            gridLines: {
-              display: true
-            }
-          }],
-        },
-        legend: {
-          display: false
-        }
-      }
-    });
-    function getRandomColorHex() {
-    var hex = "0123456789ABCDEF",
-        color = "#";
-    for (var i = 1; i <= 6; i++) {
-      color += hex[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-    </script>
+    <?php include 'detgraf/chartbar.php'; ?>
+    <?php include 'detailall/chartbar2.php'; ?>
+    <?php include 'dashboard/dashboardchart.php';  ?>
 
   </body>
 

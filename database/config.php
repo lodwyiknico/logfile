@@ -1,7 +1,7 @@
 <?php
-$localname='localhost:3307';
+$localname='100.100.200.229';
 $username='root';
-$password='';
+$password='root';
 $dbname='log';
 $koneksi=mysqli_connect($localname,$username,$password,$dbname);
 if(!$koneksi){echo"tidak Connect database";}
